@@ -1,6 +1,6 @@
 name: all_gallery_images
 description: Flutter plugin use to fetch all the images from the storage in Android and iOS .
-version: 0.1.0
+version: 0.1.0+1
 homepage: https://devblog.link
 repository: https://github.com/raju8000/all_gallery_images.git
 

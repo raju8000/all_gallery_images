@@ -1,3 +1,7 @@
+## 0.1.0+1
+
+- Updated README and LICENSE
+
 ## 0.1.0
 
 Initial release.
