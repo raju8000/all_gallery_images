@@ -1,0 +1,22 @@
+PODS:
+  - all_gallery_images (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - all_gallery_images (from `.symlinks/plugins/all_gallery_images/ios`)
+  - Flutter (from `Flutter`)
+
+EXTERNAL SOURCES:
+  all_gallery_images:
+    :path: ".symlinks/plugins/all_gallery_images/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  all_gallery_images: 0f49947fd54cc7dccb0c15d653c3e48cdb909d64
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.1
