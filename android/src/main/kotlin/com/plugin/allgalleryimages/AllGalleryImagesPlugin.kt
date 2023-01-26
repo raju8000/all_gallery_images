@@ -29,6 +29,7 @@ class AllGalleryImagesPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,
   private var allImageInfoList = ArrayList<HashMap<String,String>>()
   companion object {
     private const val PERMISSION_REQUEST_CODE = 101
+    private const val PERMISSION_REQUEST_CODE_13 = 1013
     private const val CHANNEL_NAME = "plugins.io/all_gallery_images"
   }
 
@@ -61,12 +62,19 @@ class AllGalleryImagesPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,
   }
 
   private fun getPermissionResult(result: Result, activity: Activity) {
-    if (Build.VERSION.SDK_INT >= 23) {
+    if (Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 33) {
       if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
         result.success(getAllImageList(activity))
       }
       else{
         ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
+      }
+    } else if(Build.VERSION.SDK_INT >= 33) {
+      if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED) {
+        result.success(getAllImageList(activity))
+      }
+      else{
+        ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.READ_MEDIA_IMAGES), PERMISSION_REQUEST_CODE_13)
       }
     }
   }
@@ -78,13 +86,14 @@ class AllGalleryImagesPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,
   override fun onRequestPermissionsResult(requestCode: Int,
                                           permissions: Array<String>,
                                           grantResults: IntArray): Boolean {
-    if (requestCode == PERMISSION_REQUEST_CODE) {
+
+    if (requestCode == PERMISSION_REQUEST_CODE || requestCode == PERMISSION_REQUEST_CODE_13) {
       if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
         result.success(getAllImageList(activity))
         return true
       }
       if (grantResults.isNotEmpty() && grantResults[0] ==  PackageManager.PERMISSION_DENIED) {
-        result.success(listOf("Permissions Not Granted"))
+        result.success(listOf(requestCode))
       }
     }
     return false
