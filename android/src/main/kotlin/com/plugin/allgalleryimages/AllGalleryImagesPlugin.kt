@@ -93,7 +93,7 @@ class AllGalleryImagesPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,
         return true
       }
       if (grantResults.isNotEmpty() && grantResults[0] ==  PackageManager.PERMISSION_DENIED) {
-        result.success(listOf(requestCode))
+        result.success(listOf("Permissions Not Granted"))
       }
     }
     return false
