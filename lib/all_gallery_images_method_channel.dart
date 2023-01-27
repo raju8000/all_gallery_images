@@ -23,7 +23,6 @@ class MethodChannelAllGalleryImages extends AllGalleryImagesPlatform {
       }
       return null;
     } catch (error) {
-      log(allImages![0].toString());
       if (allImages![0] == "Permissions Not Granted") {
         log(' GALLERY IMAGES: Storage Permissions Not Granted');
       }
