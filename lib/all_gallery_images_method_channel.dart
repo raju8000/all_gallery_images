@@ -8,7 +8,6 @@ import 'model/StorageImages.dart';
 
 /// An implementation of [AllGalleryImagesPlatform] that uses method channels.
 class MethodChannelAllGalleryImages extends AllGalleryImagesPlatform {
-
   static const CHANNEL_NAME = "plugins.io/all_gallery_images";
 
   @visibleForTesting
@@ -16,14 +15,15 @@ class MethodChannelAllGalleryImages extends AllGalleryImagesPlatform {
 
   @override
   Future<StorageImages?> getStorageImages() async {
-    final allImages = await methodChannel.invokeMethod<List<dynamic>>('getAllImagesFromStorage');
-    try{
-      if(allImages!=null) {
-        return  StorageImages.fromJson(allImages);
+    final allImages = await methodChannel
+        .invokeMethod<List<dynamic>>('getAllImagesFromStorage');
+    try {
+      if (allImages != null) {
+        return StorageImages.fromJson(allImages);
       }
       return null;
-    }catch(error){
-      if(allImages![0] == "Permissions Not Granted"){
+    } catch (error) {
+      if (allImages![0] == "Permissions Not Granted") {
         log(' GALLERY IMAGES: Storage Permissions Not Granted');
       }
       return null;
